@@ -1,4 +1,4 @@
-# Tomo_align
+# Tomography optimization based alignment method
 A python based algorithm for electron/X-ray tomography dataset fin alignment
 # tomo_alignment
 
@@ -13,7 +13,7 @@ A modular tomography alignment pipeline for electron/X-ray tomography, including
 
 ---
 
-# Features
+## Features
 
 - Modular multi-stage tomography pipeline
 - Config-driven experiments via YAML
@@ -24,7 +24,7 @@ A modular tomography alignment pipeline for electron/X-ray tomography, including
 
 ---
 
-# Repository Structure
+## Repository Structure
 
 ```text
 tomo_alignment/
@@ -51,7 +51,7 @@ tomo_alignment/
 
 ---
 
-# Installation
+## Installation
 
 ## 1. Clone repository
 
@@ -122,7 +122,7 @@ Example:
 
 ---
 
-# GPU Support
+## GPU Support
 
 The pipeline automatically detects CuPy.
 
@@ -149,7 +149,7 @@ gpu:
 
 ---
 
-# Configuration
+## Configuration
 
 All experiments are controlled through YAML files.
 
@@ -413,7 +413,7 @@ python run.py --params_path tomography/params/default.yml
 
 ---
 
-# Reproducibility
+### Reproducibility
 
 Each run automatically saves:
 
