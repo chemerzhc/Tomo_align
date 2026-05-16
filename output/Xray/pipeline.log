@@ -1,0 +1,14 @@
+2026-05-16 17:48:19.017 | INFO     | __main__:<module>:37 - Project root: C:\Users\cheme\Desktop\tomo_aligment
+2026-05-16 17:48:19.017 | INFO     | __main__:<module>:38 - Using config: tomography/params/default.yml
+2026-05-16 17:48:19.428 | INFO     | __main__:<module>:49 - CuPy detected -> GPU enabled
+2026-05-16 17:48:20.400 | INFO     | __main__:<module>:91 - Running preprocess...
+2026-05-16 17:49:11.435 | INFO     | __main__:<module>:37 - Project root: C:\Users\cheme\Desktop\tomo_aligment
+2026-05-16 17:49:11.436 | INFO     | __main__:<module>:38 - Using config: tomography/params/default.yml
+2026-05-16 17:49:11.827 | INFO     | __main__:<module>:49 - CuPy detected -> GPU enabled
+2026-05-16 17:49:12.497 | INFO     | __main__:<module>:107 - Running global alignment...
+2026-05-16 17:50:11.857 | INFO     | __main__:<module>:115 - Global alignment finished.
+2026-05-16 17:50:11.882 | INFO     | __main__:<module>:124 - Running common-line alignment...
+2026-05-16 17:51:02.107 | INFO     | __main__:<module>:132 - Common-line alignment finished.
+2026-05-16 17:51:02.107 | INFO     | __main__:<module>:141 - Running PC refinement...
+2026-05-16 17:52:30.162 | INFO     | __main__:<module>:149 - PC refinement finished.
+2026-05-16 17:52:30.171 | INFO     | __main__:<module>:153 - Pipeline completed.

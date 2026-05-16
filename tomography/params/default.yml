@@ -1,0 +1,100 @@
+# ==========================================================
+# Experiment
+# ==========================================================
+project:
+  # output directory
+  output_dir: "output/Xray"
+# ==========================================================
+# Device
+# ==========================================================
+gpu:
+  # whether to use GPU (CuPy)
+  use_gpu: true
+# ==========================================================
+# Pipeline control
+# Each stage can be turned on/off
+# ==========================================================
+steps:
+  # convert raw EMD folder to h5
+  preprocess: false
+  # centroid + cross correlation alignment
+  global_align: true
+  # common-line refinement
+  common_line: false
+  # projection consistency refinement
+  pc_refine: true
+# ==========================================================
+# Preprocess
+# ==========================================================
+preprocess:
+  # input EMD folder
+  emd_dir: "F:/Haichuan/20251222/RuO2/Tomo_series"
+  # output h5 file
+  output_h5: "output/Xray/output.h5"
+# ==========================================================
+# Stage 1: Global Alignment
+# ==========================================================
+global_alignment:
+  # input h5
+  h5_file: "output/Xray/misaligned_xray_dataset.h5"
+  # outputs
+  output_file: "output/Xray/test.h5"
+  movie_file: "output/Xray/test.mp4"
+  montage_path: "output/Xray/test.png"
+  # --------------------------------------------------------
+  # centroid alignment
+  # --------------------------------------------------------
+  # maximum iterations
+  max_iter_centroid: 100
+  # learning rate
+  lr_centroid: 0.3
+  # convergence tolerance
+  tol_centroid: 0.01
+  # whether centroid optimization uses GPU
+  centroid_iter_use_gpu: false
+  # --------------------------------------------------------
+  # cross correlation alignment
+  # --------------------------------------------------------
+  max_iter_cc: 100
+  lr_cc: 0.5
+  tol_cc: 0.05
+  # local crop ratio for correlation window
+  cc_window_ratio: 0.4
+  # FFT-based correlation
+  use_fft_cc: true
+  # --------------------------------------------------------
+  # post-processing
+  # --------------------------------------------------------
+  scan_size: 1.0
+  # visualization output folder
+  save_iter_frames_dir:
+    "output/Xray/vis_iters_data"
+# ==========================================================
+# Stage 2: Common-line Alignment
+# ==========================================================
+common_line:
+  h5_file: "output/Xray/test.h5"
+  max_iter: 20
+  lr: 0.7
+  output_file:
+    "output/Xray/Comline_aligned_test_refine.h5"
+  movie_file:
+    "output/Xray/movie_com_line_aligned.mp4"
+# ==========================================================
+# Stage 3: Projection Consistency Refinement
+# ==========================================================
+pc_refinement:
+  aligned_h5_file:
+    "output/Xray/test.h5"
+  output_file:
+    "output/Xray/test_SIRT_BP.h5"
+  # reconstruction size
+  Nx_target: 224
+  Ny_target: 224
+  Nz_target: 224
+  # optimization settings
+  pc_outer_loops: 3
+  pc_inner_iter: 5
+  pc_lr: 0.2
+  final_movie_file:
+    "output/Xray/final_movie_aligned.mp4"

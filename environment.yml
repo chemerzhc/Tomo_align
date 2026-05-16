@@ -1,0 +1,30 @@
+name: tomo_align
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10
+
+  # core scientific stack (stable + widely available)
+  - numpy
+  - scipy
+  - matplotlib
+  - h5py
+  - scikit-image
+  - imageio
+  - pillow
+  - tqdm
+
+  # ASTRA (may be CPU or GPU depending on system)
+  - astra-toolbox
+
+  # pip fallback layer
+  - pip
+  - pip:
+      # OpenCV only used for video export safety
+      - opencv-python
+
+      # optional GPU acceleration (will fail gracefully if no CUDA)
+      - cupy-cuda11x; platform_system != "Darwin"

@@ -1,0 +1,15 @@
+numpy
+scipy
+matplotlib
+scikit-image
+h5py
+imageio
+tqdm
+pillow
+joblib
+opencv-python
+tifffile
+astra-toolbox
+cupy
+pyyaml
+loguru
