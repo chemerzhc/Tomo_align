@@ -477,5 +477,7 @@ This guarantees exact experiment reproducibility.
 # Citation
 
 [1] Odstrčil, M., Holler, M., Raabe, J., & Guizar-Sicairos, M. (2019). Alignment methods for nanotomography with deep subpixel accuracy. Optics Express, 27(25), 36637-36652.
+
 [2] Schwartz J, Harris C, Pietryga J, Zheng H, Kumar P, Visheratina A, Kotov NA, Major B, Avery P, Ercius P, Ayachit U. Real-time 3D analysis during electron tomography using tomviz. Nature Communications. 2022 Aug 1;13(1):4458.
+
 [3] Schwartz, J., Harris, C., Pietryga, J., Zheng, H., Kumar, P., Visheratina, A., ... & Hovden, R. (2022). Real-time 3D analysis during electron tomography using tomviz. Nature Communications, 13(1), 4458.
