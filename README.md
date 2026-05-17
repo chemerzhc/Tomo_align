@@ -34,7 +34,7 @@ On a new machine:
 
 ```bash
 git clone https://github.com/chemerzhc/Tomo_align.git
-cd tomo_alignment
+cd Tomo_align
 ```
 
 ---
