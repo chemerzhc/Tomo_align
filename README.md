@@ -519,6 +519,7 @@ Placeholder for final aligned reconstruction
 ```
 
 ### Example results
+---
 
 <img width="1797" height="906" alt="image" src="https://github.com/user-attachments/assets/030c4ae8-c709-4b51-8b19-2f14dcfbc9f2" />
 ---
