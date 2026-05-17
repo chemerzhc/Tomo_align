@@ -12,6 +12,14 @@ import imageio
 # -------------------------------------------------------------------------------------------------
 def load_tilt_series(h5_file):
 
+    """Load tilt series and tilt angles from an HDF5 file.
+    
+    Args:
+        h5_file (str): Path to input HDF5 file.
+    
+    Returns:
+        tuple: (tilt_series, tilt_angles).
+    """
     print(f"[load] Loading tilt series from {h5_file}")
 
     with h5py.File(h5_file, 'r') as f:
@@ -31,6 +39,15 @@ def load_tilt_series(h5_file):
 # -------------------------------------------------------------------------------------------------
 def apply_shifts(tilt_series, shifts_array):
 
+    """Apply XY shifts to all projections.
+    
+    Args:
+        tilt_series (np.ndarray): Input tilt series.
+        shifts_array (np.ndarray): Shift values for each projection.
+    
+    Returns:
+        np.ndarray: Shifted tilt series.
+    """
     num_proj = tilt_series.shape[2]
     aligned_series = np.zeros_like(tilt_series)
 
@@ -912,6 +929,14 @@ def save_aligned_h5(
     tilt_angles,
     output_file
 ):
+    """Save aligned tilt series into HDF5 file.
+    
+    Args:
+        processed_series (np.ndarray): Processed tilt series.
+        shifts_array (np.ndarray): Alignment shifts.
+        tilt_angles (np.ndarray): Tilt angles.
+        output_file (str): Output file path.
+    """
     print(
         f"[save] Saving post-processed data "
         f"to {output_file}"
@@ -952,6 +977,14 @@ def common_line_alignment(
     max_shift_per_iter=100.0,
     output_dir="Common_line_align_log_gpu"
 ):
+    """Perform adjacent-frame cumulative XY alignment using VMF and GPU.
+    
+    Args:
+        tilt_series (np.ndarray): Input tilt series.
+    
+    Returns:
+        dict: Aligned series, shifts, and loss history.
+    """
     import os
     import cupy as cp
     from scipy.ndimage import shift

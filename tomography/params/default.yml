@@ -1,3 +1,5 @@
+############RUNING COMMAND#########################
+# python run.py --params_path tomography/params/default.yml
 # ==========================================================
 # Experiment
 # ==========================================================
@@ -28,7 +30,7 @@ steps:
 # ==========================================================
 preprocess:
   # input EMD folder
-  emd_dir: "F:/Haichuan/20251222/RuO2/Tomo_series"
+  emd_dir: "data/Tomo_series"
   # output h5 file
   output_h5: "output/Xray/output.h5"
 # ==========================================================

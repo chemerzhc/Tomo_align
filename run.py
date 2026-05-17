@@ -1,10 +1,11 @@
 import argparse
 import os
 import sys
-
 from tomography.utils.config import load_config
 from tomography.utils.logger import setup_logger
 
+############RUNING COMMAND#########################
+# python run.py --params_path tomography/params/default.yml
 # =========================================================
 # CLI
 # =========================================================
