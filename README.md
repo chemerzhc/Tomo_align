@@ -83,6 +83,22 @@ If successful, no error should appear.
 
 For lightweight CPU-only installation.
 
+It is recommended to first create a clean Python environment.
+
+### Option A: Conda environment
+
+Create environment:
+
+```bash
+conda create -n tomo_align python=3.10
+```
+
+Activate environment:
+
+```bash
+conda activate tomo_align
+```
+
 Install dependencies:
 
 ```bash
@@ -94,6 +110,52 @@ Install package:
 ```bash
 pip install -e .
 ```
+
+Verify installation:
+
+```bash
+python -c "import tomography; print('tomography installed successfully')"
+```
+
+---
+
+### Option B: Python virtual environment (venv)
+
+Create virtual environment:
+
+#### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+#### Linux / Mac
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Install package:
+
+```bash
+pip install -e .
+```
+
+Verify installation:
+
+```bash
+python -c "import tomography; print('tomography installed successfully')"
+```
+
+---
 
 Or install dependencies manually:
 
