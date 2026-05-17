@@ -33,7 +33,7 @@ A python based algorithm for electron/X-ray tomography dataset fine alignment
 On a new machine:
 
 ```bash
-git clone https://github.com/chemerzhc/tomo_alignment.git
+git clone https://github.com/chemerzhc/Tomo_align.git
 cd tomo_alignment
 ```
 
