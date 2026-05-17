@@ -1,4 +1,4 @@
-name: tomo_align
+name: tomo_TV
 
 channels:
   - conda-forge
