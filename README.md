@@ -4,7 +4,7 @@ A python based algorithm for electron/X-ray tomography dataset fin alignment
 
 <img width="803" height="782" alt="image" src="https://github.com/user-attachments/assets/b5188301-098e-43b2-8c64-c119c542b712" />
 
-A modular tomography alignment pipeline for electron/X-ray tomography, including:
+**A modular tomography alignment pipeline for electron/X-ray tomography, including:**
 
 - Preprocessing of raw EMD tomography series
 - Global alignment (centroid + cross-correlation)
@@ -23,33 +23,6 @@ A modular tomography alignment pipeline for electron/X-ray tomography, including
 - Reproducible experiment logging
 - Automatic config snapshot saving
 - Easy stage on/off control
-
----
-
-## Repository Structure
-
-```text
-tomo_alignment/
-│
-├── run.py
-│
-├── tomography/
-│   ├── alignment/
-│   ├── preprocess/
-│   ├── reconstruction/
-│   ├── utils/
-│   │   ├── config.py
-│   │   └── logger.py
-│   │
-│   ├── params/
-│   │   └── default.yml
-│   │
-│   └── __init__.py
-│
-├── output/
-│
-└── README.md
-```
 
 ---
 
@@ -197,6 +170,31 @@ gpu:
 ```
 
 ---
+
+## Repository Structure
+
+```text
+tomo_alignment/
+│
+├── run.py
+│
+├── tomography/
+│   ├── alignment/
+│   ├── preprocess/
+│   ├── reconstruction/
+│   ├── utils/
+│   │   ├── config.py
+│   │   └── logger.py
+│   │
+│   ├── params/
+│   │   └── default.yml
+│   │
+│   └── __init__.py
+│
+├── output/
+│
+└── README.md
+```
 
 ## Configuration
 
@@ -478,4 +476,6 @@ This guarantees exact experiment reproducibility.
 
 # Citation
 
-Work in progress.
+[1] Odstrčil, M., Holler, M., Raabe, J., & Guizar-Sicairos, M. (2019). Alignment methods for nanotomography with deep subpixel accuracy. Optics Express, 27(25), 36637-36652.
+[2] Schwartz J, Harris C, Pietryga J, Zheng H, Kumar P, Visheratina A, Kotov NA, Major B, Avery P, Ercius P, Ayachit U. Real-time 3D analysis during electron tomography using tomviz. Nature Communications. 2022 Aug 1;13(1):4458.
+[3] Schwartz, J., Harris, C., Pietryga, J., Zheng, H., Kumar, P., Visheratina, A., ... & Hovden, R. (2022). Real-time 3D analysis during electron tomography using tomviz. Nature Communications, 13(1), 4458.
