@@ -518,10 +518,9 @@ Placeholder for alignment movie / optimization process
 Placeholder for final aligned reconstruction
 ```
 
-### Example 
+### Example results
 
-<img width="1817" height="451" alt="image" src="https://github.com/user-attachments/assets/232812b3-829f-46f5-b0ef-efbff92ba41a" />
-
+<img width="1797" height="906" alt="image" src="https://github.com/user-attachments/assets/030c4ae8-c709-4b51-8b19-2f14dcfbc9f2" />
 ---
 
 # Common Errors
