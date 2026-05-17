@@ -259,8 +259,354 @@ Or disable GPU:
 gpu:
   use_gpu: false
 ```
+---
 
-### Reproducibility
+# Repository Structure
+
+```text
+tomo_alignment/
+│
+├── run.py
+│
+├── tomography/
+│   ├── alignment/
+│   ├── preprocess/
+│   ├── reconstruction/
+│   ├── utils/
+│   │   ├── config.py
+│   │   └── logger.py
+│   │
+│   ├── params/
+│   │   └── default.yml
+│   │
+│   └── __init__.py
+│
+├── output/
+│
+└── README.md
+```
+
+---
+
+# Configuration
+
+All experiments are controlled through YAML configuration files.
+
+Configs are stored under:
+
+```text
+tomography/params/
+```
+
+Default example:
+
+```text
+tomography/params/default.yml
+```
+
+---
+
+## Example Configuration
+
+```yaml
+project:
+  output_dir: "output/Xray"
+
+gpu:
+  use_gpu: true
+
+steps:
+  preprocess: true
+  global_align: true
+  common_line: true
+  pc_refine: true
+
+preprocess:
+  emd_dir: "data/Tomo_series"
+  output_h5: "output/Xray/output.h5"
+
+global_alignment:
+
+  h5_file: "output/Xray/output.h5"
+
+  output_file: "output/Xray/test.h5"
+  movie_file: "output/Xray/test.mp4"
+  montage_path: "output/Xray/test.png"
+
+  max_iter_centroid: 100
+  lr_centroid: 0.3
+  tol_centroid: 0.01
+
+  max_iter_cc: 100
+  lr_cc: 0.5
+  tol_cc: 0.05
+
+common_line:
+
+  h5_file: "output/Xray/test.h5"
+
+  max_iter: 20
+  lr: 0.7
+
+  output_file:
+    "output/Xray/comline.h5"
+
+pc_refinement:
+
+  aligned_h5_file:
+    "output/Xray/test.h5"
+
+  output_file:
+    "output/Xray/refined.h5"
+
+  Nx_target: 224
+  Ny_target: 224
+  Nz_target: 224
+```
+
+---
+
+# Running the Pipeline
+
+Run from the **project root directory**.
+
+Default configuration:
+
+```bash
+python run.py --params_path tomography/params/default.yml
+```
+
+Custom experiment:
+
+```bash
+python run.py --params_path tomography/params/ruo2.yml
+```
+
+---
+
+# Pipeline Stages
+
+Each stage can be enabled or disabled independently.
+
+Inside YAML:
+
+```yaml
+steps:
+  preprocess: true
+  global_align: true
+  common_line: true
+  pc_refine: true
+```
+
+Example:
+
+Skip preprocessing:
+
+```yaml
+steps:
+  preprocess: false
+```
+
+This allows restarting from intermediate outputs without rerunning the entire pipeline.
+
+---
+
+# Output Files
+
+All outputs are saved to:
+
+```text
+output/
+```
+
+Example:
+
+```text
+output/Xray/
+│
+├── pipeline.log
+├── used_config.yml
+├── test.h5
+├── test.mp4
+├── test.png
+└── final_movie_aligned.mp4
+```
+
+### pipeline.log
+
+Contains runtime logs for debugging and experiment tracking.
+
+### used_config.yml
+
+Automatically saves the exact configuration used for reproducibility.
+
+---
+
+# Example Workflow
+
+## Step 1: Prepare tomography series
+
+Prepare data under:
+
+```text
+data/
+└── Tomo_series/
+```
+
+---
+
+## Step 2: Edit configuration
+
+Open:
+
+```text
+tomography/params/default.yml
+```
+
+Set:
+
+```yaml
+preprocess:
+  emd_dir: "data/Tomo_series"
+```
+
+---
+
+## Step 3: Run pipeline
+
+```bash
+python run.py --params_path tomography/params/default.yml
+```
+
+---
+
+## Step 4: Check outputs
+
+Results will be generated under:
+
+```text
+output/Xray/
+```
+
+---
+
+# Examples
+
+## Example 1: X-ray Tomography Alignment
+
+### Input
+
+(Add representative raw tomography projections here)
+
+```text
+Placeholder for input projection image / GIF
+```
+
+### Alignment Process
+
+(Add intermediate alignment visualization here)
+
+```text
+Placeholder for alignment movie / optimization process
+```
+
+### Output
+
+(Add reconstructed or aligned result here)
+
+```text
+Placeholder for final aligned reconstruction
+```
+
+### Example 
+
+<img width="1817" height="451" alt="image" src="https://github.com/user-attachments/assets/232812b3-829f-46f5-b0ef-efbff92ba41a" />
+
+---
+
+# Common Errors
+
+## ModuleNotFoundError: No module named 'tomography'
+
+Usually caused by missing package installation.
+
+Run:
+
+```bash
+pip install -e .
+```
+
+Then verify:
+
+```bash
+python -c "import tomography"
+```
+
+---
+
+## Wrong Working Directory
+
+Incorrect:
+
+```bash
+cd tomography
+python run.py
+```
+
+Correct:
+
+Run from project root:
+
+```bash
+python run.py --params_path tomography/params/default.yml
+```
+
+---
+
+## CuPy not found
+
+GPU acceleration unavailable.
+
+Install CuPy:
+
+### CUDA 12.x
+
+```bash
+pip install cupy-cuda12x
+```
+
+### CUDA 11.x
+
+```bash
+pip install cupy-cuda11x
+```
+
+Or disable GPU:
+
+```yaml
+gpu:
+  use_gpu: false
+```
+
+---
+
+## FileNotFoundError for config
+
+Ensure config exists:
+
+```text
+tomography/params/default.yml
+```
+
+Run:
+
+```bash
+python run.py --params_path tomography/params/default.yml
+```
+
+---
+
+# Reproducibility
 
 Each run automatically saves:
 
@@ -268,7 +614,7 @@ Each run automatically saves:
 used_config.yml
 ```
 
-inside output directory.
+inside the output directory.
 
 This guarantees exact experiment reproducibility.
 
