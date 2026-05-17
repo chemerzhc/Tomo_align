@@ -90,13 +90,13 @@ It is recommended to first create a clean Python environment.
 Create environment:
 
 ```bash
-conda create -n tomo_align python=3.10
+conda create -n tomo_TV python=3.10
 ```
 
 Activate environment:
 
 ```bash
-conda activate tomo_align
+conda activate tomo_TV
 ```
 
 Install dependencies:
