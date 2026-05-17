@@ -26,7 +26,7 @@ A python based algorithm for electron/X-ray tomography dataset fin alignment
 
 ---
 
-## Installation
+# Installation
 
 ## 1. Clone repository
 
@@ -34,22 +34,19 @@ On a new machine:
 
 ```bash
 git clone https://github.com/chemerzhc/tomo_alignment.git
-```
-
-Move into the project directory:
-
-```bash
 cd tomo_alignment
 ```
 
 ---
 
-## 2. Create conda environment
+## 2. Recommended Installation (Conda)
 
-Recommended:
+Recommended for reproducibility and GPU support.
+
+Create environment:
 
 ```bash
-conda create -n tomo_TV python=3.10
+conda env create -f environment.yml
 ```
 
 Activate environment:
@@ -63,44 +60,28 @@ conda activate tomo_TV
 ### Linux / Mac
 
 ```bash
-source activate tomo_TV
-```
-
----
-
-## 3. Installation
-
-There are two installation options.
-
-### Option 1 (Recommended): Conda Environment
-
-Recommended for reproducibility and GPU support.
-
-Create the environment:
-
-```bash
-conda env create -f environment.yml
-```
-
-Activate environment:
-
-```bash
 conda activate tomo_TV
+```
+
+Install package in editable mode:
+
+```bash
+pip install -e .
 ```
 
 Verify installation:
 
 ```bash
-python -c "import tomography"
+python -c "import tomography; print('tomography installed successfully')"
 ```
 
 If successful, no error should appear.
 
 ---
 
-### Option 2: pip Installation
+## 3. Lightweight Installation (pip)
 
-For lightweight installation.
+For lightweight CPU-only installation.
 
 Install dependencies:
 
@@ -108,47 +89,66 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Or install manually:
+Install package:
+
+```bash
+pip install -e .
+```
+
+Or install dependencies manually:
 
 ```bash
 pip install numpy scipy matplotlib h5py pyyaml loguru tqdm opencv-python
-```
-
-For GPU acceleration:
-
-```bash
-pip install cupy-cuda12x
-```
-
-Replace CUDA version accordingly.
-
-Examples:
-
-- CUDA 11.x
-
-```bash
-pip install cupy-cuda11x
-```
-
-- CUDA 12.x
-
-```bash
-pip install cupy-cuda12x
+pip install -e .
 ```
 
 Verify installation:
 
 ```bash
-python -c "import tomography"
+python -c "import tomography; print('tomography installed successfully')"
 ```
 
 ---
 
-## GPU Support
+## 4. GPU Support (Optional)
 
-The pipeline automatically detects CuPy.
+The pipeline supports GPU acceleration via CuPy.
 
-If CuPy is installed:
+First check CUDA version:
+
+```bash
+nvidia-smi
+```
+
+Example output:
+
+```text
+CUDA Version: 12.2
+```
+
+Then install the corresponding CuPy version.
+
+### CUDA 12.x
+
+```bash
+pip install cupy-cuda12x
+```
+
+### CUDA 11.x
+
+```bash
+pip install cupy-cuda11x
+```
+
+Replace according to your CUDA version.
+
+Verify GPU detection:
+
+```bash
+python -c "import tomography"
+```
+
+If GPU is detected:
 
 ```text
 [env] CuPy detected -> GPU enabled
@@ -162,7 +162,7 @@ Otherwise:
 
 To force CPU mode:
 
-Edit:
+Edit config:
 
 ```yaml
 gpu:
@@ -171,160 +171,20 @@ gpu:
 
 ---
 
-## Repository Structure
+# Quick Start
 
-```text
-tomo_alignment/
-│
-├── run.py
-│
-├── tomography/
-│   ├── alignment/
-│   ├── preprocess/
-│   ├── reconstruction/
-│   ├── utils/
-│   │   ├── config.py
-│   │   └── logger.py
-│   │
-│   ├── params/
-│   │   └── default.yml
-│   │
-│   └── __init__.py
-│
-├── output/
-│
-└── README.md
-```
+After installation, run a quick experiment to verify everything works.
 
-## Configuration
-
-All experiments are controlled through YAML files.
-
-Configs are stored under:
-
-```text
-tomography/params/
-```
-
-Example:
-
-```text
-tomography/params/default.yml
-```
-
----
-
-## Example configuration
-
-```yaml
-project:
-  output_dir: "output/Xray"
-
-gpu:
-  use_gpu: true
-
-steps:
-  preprocess: true
-  global_align: true
-  common_line: true
-  pc_refine: true
-
-preprocess:
-  emd_dir: "data/Tomo_series"
-  output_h5: "output/Xray/output.h5"
-
-global_alignment:
-
-  h5_file: "output/Xray/output.h5"
-
-  output_file: "output/Xray/test.h5"
-  movie_file: "output/Xray/test.mp4"
-  montage_path: "output/Xray/test.png"
-
-  max_iter_centroid: 100
-  lr_centroid: 0.3
-  tol_centroid: 0.01
-
-  max_iter_cc: 100
-  lr_cc: 0.5
-  tol_cc: 0.05
-
-common_line:
-
-  h5_file: "output/Xray/test.h5"
-
-  max_iter: 20
-  lr: 0.7
-
-  output_file:
-    "output/Xray/comline.h5"
-
-pc_refinement:
-
-  aligned_h5_file:
-    "output/Xray/test.h5"
-
-  output_file:
-    "output/Xray/refined.h5"
-
-  Nx_target: 224
-  Ny_target: 224
-  Nz_target: 224
-```
-
----
-
-# Running the Pipeline
-
-Run from the **project root directory**.
-
-Example:
+From the project root directory:
 
 ```bash
 python run.py --params_path tomography/params/default.yml
 ```
 
-Example for a custom experiment:
-
-```bash
-python run.py --params_path tomography/params/ruo2.yml
-```
-
----
-
-# Pipeline Stages
-
-Each stage can be enabled or disabled.
-
-Inside YAML:
-
-```yaml
-steps:
-  preprocess: true
-  global_align: true
-  common_line: true
-  pc_refine: true
-```
-
-Example:
-
-Skip preprocessing:
-
-```yaml
-steps:
-  preprocess: false
-```
-
-This allows restarting from intermediate outputs.
-
----
-
-# Output Files
-
-All outputs are saved to:
+If successful, output files will appear in:
 
 ```text
-output/
+output/Xray/
 ```
 
 Example:
@@ -340,73 +200,31 @@ output/Xray/
 └── final_movie_aligned.mp4
 ```
 
-### pipeline.log
-
-Contains runtime logs.
-
-### used_config.yml
-
-Snapshot of the exact config used.
-
-Useful for reproducibility.
+If `pipeline.log` and `used_config.yml` are generated, installation is working correctly.
 
 ---
 
-# Example Workflow
+## Common Installation Errors
 
-## Step 1
+### ModuleNotFoundError: No module named 'tomography'
 
-Prepare tomography series:
+Usually caused by missing package installation.
 
-```text
-data/
-└── Tomo_series/
-```
-
----
-
-## Step 2
-
-Edit config:
-
-```text
-tomography/params/default.yml
-```
-
-Set:
-
-```yaml
-preprocess:
-  emd_dir: "data/Tomo_series"
-```
-
----
-
-## Step 3
-
-Run pipeline:
+Run:
 
 ```bash
-python run.py --params_path tomography/params/default.yml
+pip install -e .
+```
+
+Then verify:
+
+```bash
+python -c "import tomography"
 ```
 
 ---
 
-## Step 4
-
-Check outputs:
-
-```text
-output/Xray/
-```
-
----
-
-# Common Errors
-
-## ModuleNotFoundError: No module named 'tomography'
-
-Wrong working directory.
+### Wrong Working Directory
 
 Incorrect:
 
@@ -425,7 +243,7 @@ python run.py --params_path tomography/params/default.yml
 
 ---
 
-## CuPy not found
+### CuPy not found
 
 GPU acceleration unavailable.
 
@@ -441,24 +259,6 @@ Or disable GPU:
 gpu:
   use_gpu: false
 ```
-
----
-
-## FileNotFoundError for config
-
-Ensure config exists:
-
-```text
-tomography/params/default.yml
-```
-
-And run:
-
-```bash
-python run.py --params_path tomography/params/default.yml
-```
-
----
 
 ### Reproducibility
 
