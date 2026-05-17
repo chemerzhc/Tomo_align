@@ -2,29 +2,58 @@ name: tomo_align
 
 channels:
   - conda-forge
-  - defaults
 
 dependencies:
+  # ------------------------------------------------------------------
+  # Python
+  # ------------------------------------------------------------------
   - python=3.10
 
-  # core scientific stack (stable + widely available)
-  - numpy
-  - scipy
-  - matplotlib
-  - h5py
-  - scikit-image
+  # ------------------------------------------------------------------
+  # Core scientific stack
+  # ------------------------------------------------------------------
+  - numpy>=1.24,<3.0
+  - scipy>=1.10
+  - matplotlib>=3.7
+  - scikit-image>=0.21
+  - h5py>=3.9
   - imageio
+  - imageio-ffmpeg
   - pillow
   - tqdm
+  - pyyaml
+  - psutil
 
-  # ASTRA (may be CPU or GPU depending on system)
-  - astra-toolbox
+  # ------------------------------------------------------------------
+  # FFT / performance
+  # ------------------------------------------------------------------
+  - pyfftw
 
-  # pip fallback layer
+  # ------------------------------------------------------------------
+  # Video export
+  # ------------------------------------------------------------------
+  - ffmpeg
+
+  # ------------------------------------------------------------------
+  # Tomography reconstruction
+  # ------------------------------------------------------------------
+  - astra-toolbox>=2.2
+
+  # ------------------------------------------------------------------
+  # Optional visualization
+  # ------------------------------------------------------------------
+  - pyvista
+  - vtk
+
+  # ------------------------------------------------------------------
+  # Packaging / pip
+  # ------------------------------------------------------------------
   - pip
-  - pip:
-      # OpenCV only used for video export safety
-      - opencv-python
 
-      # optional GPU acceleration (will fail gracefully if no CUDA)
-      - cupy-cuda11x; platform_system != "Darwin"
+  - pip:
+      # safer OpenCV headless
+      - opencv-python-headless>=4.8
+
+      # optional GPU acceleration
+      # install manually if CUDA exists
+      # pip install cupy-cuda11x
