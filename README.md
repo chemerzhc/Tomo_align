@@ -1,4 +1,4 @@
-# Tomography optimization based alignment method
+# Optimization based tomography alignment method
 A python based algorithm for electron/X-ray tomography dataset fin alignment
 # tomo_alignment
 
@@ -60,7 +60,7 @@ tomo_alignment/
 On a new machine:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/tomo_alignment.git
+git clone https://github.com/chemerzhc/tomo_alignment.git
 ```
 
 Move into the project directory:
@@ -95,15 +95,47 @@ source activate tomo_TV
 
 ---
 
-## 3. Install dependencies
+## 3. Installation
 
-Install required packages:
+There are two installation options.
+
+### Option 1 (Recommended): Conda Environment
+
+Recommended for reproducibility and GPU support.
+
+Create the environment:
+
+```bash
+conda env create -f environment.yml
+```
+
+Activate environment:
+
+```bash
+conda activate tomo_TV
+```
+
+Verify installation:
+
+```bash
+python -c "import tomography"
+```
+
+If successful, no error should appear.
+
+---
+
+### Option 2: pip Installation
+
+For lightweight installation.
+
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If `requirements.txt` is unavailable:
+Or install manually:
 
 ```bash
 pip install numpy scipy matplotlib h5py pyyaml loguru tqdm opencv-python
@@ -117,10 +149,25 @@ pip install cupy-cuda12x
 
 Replace CUDA version accordingly.
 
-Example:
+Examples:
 
-- CUDA 11.x → `cupy-cuda11x`
-- CUDA 12.x → `cupy-cuda12x`
+- CUDA 11.x
+
+```bash
+pip install cupy-cuda11x
+```
+
+- CUDA 12.x
+
+```bash
+pip install cupy-cuda12x
+```
+
+Verify installation:
+
+```bash
+python -c "import tomography"
+```
 
 ---
 
