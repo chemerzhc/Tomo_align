@@ -1,6 +1,7 @@
 # Optimization based tomography alignment method
 A python based algorithm for electron/X-ray tomography dataset fine alignment
-Final project for CHEM7870 Haichuan Zhang hz738@cornell.edu
+
+**Final project for CHEM7870 Haichuan Zhang hz738@cornell.edu**
 # Tomo_alignment
 
 <img width="400" height="390" alt="image" src="https://github.com/user-attachments/assets/b5188301-098e-43b2-8c64-c119c542b712" />
